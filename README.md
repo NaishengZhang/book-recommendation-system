@@ -70,13 +70,13 @@ For full credit, implement an extension on top of the baseline collaborative fil
 
 The choice of extension is up to you, but here are some ideas:
 
+  - *Alternative model formualtions*: the `AlternatingLeastSquares` model in Spark implements a particular form of implicit-feedback modeling, but you could change its behavior by modifying the count data.  Conduct a thorough evaluation of different modification strategies (e.g., log compression, or dropping low count values) and their impact on overall accuracy.
   - *Fast search*: use a spatial data structure (e.g., LSH or partition trees) to implement accelerated search at query time.  For this, it is best to use an existing library such as `annoy` or `nmslib`, and you will need to export the model parameters from Spark to work in your chosen environment.  For full credit, you should provide a thorough evaluation of the efficiency gains provided by your spatial data structure over a brute-force search method.
-  - *Alternative model formualtions*: the `AlternatingLeastSquares` model in Spark implements a particular form of implicit-feedback modeling, but you could change its behavior by modifying the entries in the utility matrix.  Conduct a thorough evaluation of different modification strategies (e.g., log compression, or dropping low count values) and their impact on overall accuracy.
   - *Cold-start*: using the supplementary data, build a model that can map observable feature data to the learned latent factor representation for items.  To evaluate its accuracy, simulate a cold-start scenario by holding out a subset of items during training (of the recommender model), and compare its performance to a full collaborative filter model.
   - *Error analysis*: after training the model, analyze the errors that it makes.  Are certain types of item over- or under-represented?  Make use of the supplementary metadata and tag information to inform your analysis.
-  - *Exploration*: use the learned representation to develop a visualization of the items and users, e.g., using T-SNE or UMAP.
+  - *Exploration*: use the learned representation to develop a visualization of the items and users, e.g., using T-SNE or UMAP.  The visualization should somehow integrate additional information (features, metadata, or tags) to illustrate how items are distributed in the learned space.
 
-You are welcome to propose your own extension ideas, but they must be submitted in writing and approved by the course staff (Brian, Mayank, or Saumya) by 2019-05-06 at the latest.
+You are welcome to propose your own extension ideas, but they must be submitted in writing and approved by the course staff (Brian, Mayank, or Saumya) by 2019-05-06 at the latest.  If you want to propose an extension, please get in contact as soon as possible so that we have sufficient time to consider and approve the idea.
 
 
 # What to turn in
