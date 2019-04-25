@@ -45,9 +45,9 @@ The four additional files consist of supplementary data for each track (item) in
 
 Your recommendation model should use Spark's alternating least squares (ALS) method to learn latent factor representations for users and items.  This model has some hyper-parameters that you should tune to optimize performance on the validation set, notably: 
 
-    - the *rank* (dimension) of the latent factors,
-    - the *regularization* parameter, and
-    - *alpha*, the scaling parameter for handling implicit feedback (count) data.
+  - the *rank* (dimension) of the latent factors,
+  - the *regularization* parameter, and
+  - *alpha*, the scaling parameter for handling implicit feedback (count) data.
 
 The choice of evaluation criteria for hyper-parameter tuning is entirely up to you, as is the range of hyper-parameters you consider, but be sure to document your choices in the final report.
 
