@@ -45,20 +45,44 @@ Overall there are 876K users, 2.4M books, and 223M interactions.
 
 ## Basic recommender system [80% of grade]
 
-Your recommendation model should use Spark's alternating least squares (ALS) method to learn latent factor representations for users and items.  This model has some hyper-parameters that you should tune to optimize performance on the validation set, notably: 
+Your recommendation model should use Spark's alternating least squares (ALS) method to learn latent factor representations for users and items.
+Be sure to thoroughly read through the documentation on the [mllib recommendation module](https://spark.apache.org/docs/latest/api/python/pyspark.mllib.html#module-pyspark.mllib.recommendation) before getting started.
 
-  - the *rank* (dimension) of the latent factors,
-  - the *regularization* parameter, and
-  - *alpha*, the scaling parameter for handling implicit feedback (count) data.
+This model has some hyper-parameters that you should tune to optimize performance on the validation set, notably: 
+
+  - the *rank* (dimension) of the latent factors, and
+  - the regularization parameter *lambda*.
+
+### Data splitting and subsampling
 
 You will need to construct train, validation, and test splits of the data.
 It's a good idea to do this first (using a fixed random seed) and save the results, so that your validation scores are comparable across runs.
 
-The choice of evaluation criteria for hyper-parameter tuning is entirely up to you, as is the range of hyper-parameters you consider, but be sure to document your choices in the final report.
-As a general rule of thumb, you should explore ranges of each hyperparameter that are sufficiently large to produce observable differences in your evaluation score.
+Data splitting for recommender system interactions (user-item ratings) can be a bit more delicate than the typical randomized partitioning that you might encounter in a standard regression or classification setup, and you will need to think through the process carefully.
+As a general recipe, we recommend the following:
+  - Select 60% of users (and all of their interactions) to form the *training set*.
+  - Select 20% of users to form the *validation set*.  For each validation user, use half of their interactions for training, and the other half should be held out for validation.  (Remember: you can't predict items for a user with no history at all!)
+  - Remaining users: same process as for validation.
 
-Once your model is trained, evaluate it on a test set using the ranking metrics provided by spark.  Evaluations should be based on predictions of the top 500 items for each user.
+As mentioned below, it's a good idea to downsample the data when prototyping your implementation.  
+Downsampling should follow similar logic to partitioning: don't downsample interactions directly.
+Instead, sample a percentage of users, and take all of their interactions to make a miniature version of the data.
 
+Any items not observed during training (i.e., which have no interactions in the training set, or in the observed portion of the validation and test users), can be omitted unless you're implementing cold-start recommendation as an extension.
+
+
+### Evaluation
+
+Once your model is trained, you will need to evaluate its accuracy on the validation and test data.
+Scores for validation and test should both be reported in your final writeup.
+Evaluations should be based on predicted top 500 items for each user.
+
+The choice of evaluation criteria for hyper-parameter tuning is up to you, as is the range of hyper-parameters you consider, but be sure to document your choices in the final report.
+As a general rule, you should explore ranges of each hyper-parameter that are sufficiently large to produce observable differences in your evaluation score.
+
+In addition to the RMS error metric, Spark provides some additional evaluation metrics which you can use to evaluate your implementation.
+Refer to the [ranking metrics](https://spark.apache.org/docs/latest/mllib-evaluation-metrics.html#ranking-systems) section of the documentation for more details.
+If you like, you may also use additional software implementations of recommendation or ranking metric evaluations, but please cite any additional software you use in the project.
 
 ### Hints
 
@@ -80,6 +104,7 @@ Concretely, this means that it will be helpful for you to have a working pipelin
 We suggest building sub-samples of 1%, 5%, and 25% of the data, and then running the entire set of experiments end-to-end on each sample before attempting the entire dataset.
 This will help you make efficient progress and debug your implementation, while still allowing other students to use the cluster effectively.
 If for any reason you are unable to run on the full dataset, you should report your partial results obtained on the smaller sub-samples.
+Any sub-sampling should be performed prior to generating train/validation/test splits.
 
 
 ## Extensions [20% of grade]
@@ -88,7 +113,7 @@ For full credit, implement an extension on top of the baseline collaborative fil
 
 The choice of extension is up to you, but here are some ideas:
 
-   - *Extended interaction models*: The raw interaction data includes ratings (1-5 stars), but additional information is available, including [reviews](https://sites.google.com/eng.ucsd.edu/ucsdbookgraph/reviews?authuser=0).  Can you use this additional information to improve recommendation accuracy?
+   - *Extended interaction models*: The raw interaction data includes ratings (1-5 stars), but additional information is available, including [reviews](https://sites.google.com/eng.ucsd.edu/ucsdbookgraph/reviews?authuser=0).  Can you use this additional information to improve recommendation accuracy?  What about the `is_read` flag for each user/book interaction: how can you use this information?
    - *Comparison to single-machine implementations*: compare Spark's parallel ALS model to a single-machine implementation, e.g. [lightfm](https://github.com/lyst/lightfm).  Your comparison should measure both effeciency (model fitting time as a function of data set size) and resulting accuracy.
   - *Fast search*: use a spatial data structure (e.g., LSH or partition trees) to implement accelerated search at query time.  For this, it is best to use an existing library such as [annoy](https://github.com/spotify/annoy) or [nmslib](https://github.com/nmslib/nmslib), and you will need to export the model parameters from Spark to work in your chosen environment.  For full credit, you should provide a thorough evaluation of the efficiency gains provided by your spatial data structure over a brute-force search method.
   - *Cold-start*: using the [supplementary book data](https://sites.google.com/eng.ucsd.edu/ucsdbookgraph/books?authuser=0), build a model that can map observable data to the learned latent factor representation for items.  To evaluate its accuracy, simulate a cold-start scenario by holding out a subset of items during training (of the recommender model), and compare its performance to a full collaborative filter model.
