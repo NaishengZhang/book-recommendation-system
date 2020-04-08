@@ -46,7 +46,7 @@ Overall there are 876K users, 2.4M books, and 223M interactions.
 ## Basic recommender system [80% of grade]
 
 Your recommendation model should use Spark's alternating least squares (ALS) method to learn latent factor representations for users and items.
-Be sure to thoroughly read through the documentation on the [mllib recommendation module](https://spark.apache.org/docs/latest/api/python/pyspark.mllib.html#module-pyspark.mllib.recommendation) before getting started.
+Be sure to thoroughly read through the documentation on the [pyspark.ml.recommendation module](https://spark.apache.org/docs/latest/api/python/pyspark.ml.html#module-pyspark.ml.recommendation) before getting started.
 
 This model has some hyper-parameters that you should tune to optimize performance on the validation set, notably: 
 
@@ -70,6 +70,8 @@ Instead, sample a percentage of users, and take all of their interactions to mak
 
 Any items not observed during training (i.e., which have no interactions in the training set, or in the observed portion of the validation and test users), can be omitted unless you're implementing cold-start recommendation as an extension.
 
+In general, users with few interactions (say, fewer than 10) may not provide sufficient data for evaluation, especially after partitioning their observations into train/test.
+You may discard these users from the experiment, but document your exact steps in the report.
 
 ### Evaluation
 
