@@ -43,13 +43,15 @@ def main(spark, data_file, percent_data):
     # Read data from parquet
     # interactions = spark.read.csv(data_file, header=True, inferSchema=True)
     # interactions.write.parquet('interactions.parquet')
+    time_stamp = datetime.datetime.now()
+    f = open("out.txt", "a")
+    print("program start at:" + time_stamp.strftime('%Y.%m.%d-%H:%M:%S'), file=f) ##2017.02.19-14:03:20
+    f.close()
     interactions_pq = spark.read.parquet('interactions.parquet')
     interactions_pq = interactions_pq.select('user_id', 'book_id', 'rating')
     interactions_pq.createOrReplaceTempView('interactions_pq')
-    time_stamp = datetime.datetime.now()
-  
+
     f = open("out.txt", "a")
-    print("time_stamp:" + time_stamp.strftime('%Y.%m.%d-%H:%M:%S'), file=f) ##2017.02.19-14:03:20
     print("finish reading data", file=f)
     f.close()
     #filter: count of interactions > 10
