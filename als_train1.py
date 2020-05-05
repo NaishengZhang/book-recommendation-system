@@ -125,7 +125,7 @@ def main(spark, data_file, percent_data):
     windowSpec = Window.partitionBy('user_id_index').orderBy(col('rating_index').desc())
     perUserActualItemsDF = (test_test_new
                .select('user_id_index', 'book_id_index', 'rating_index', F.rank().over(windowSpec).alias('rank'))
-               .where(f'rank <= {10} and rating_index > {0}')
+               .where(f'rank <= {10} and rating_index > {0}') # rank = 500
                .groupBy('user_id_index')
                .agg(expr('collect_list(book_id_index) as recommendations')))
 
@@ -227,7 +227,7 @@ if __name__ == "__main__":
     # Get the filename from the command line
     data_file = sys.argv[1]
     # data percent
-    percent_data = sys.argv[2]
+    percent_data = float(sys.argv[2])
     # And the location to store the trained model
     # model_file = sys.argv[2]
 
