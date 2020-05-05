@@ -6,6 +6,13 @@ Usage:
 
     spark-submit als_train.py data/small/goodreads_interactions_poetry.json
     spark-submit als_train1.py hdfs:/user/bm106/pub/goodreads/goodreads_interactions.csv 0.01
+    interactions = spark.read.csv("hdfs:/user/bm106/pub/goodreads/goodreads_interactions.csv")
+    x = "goodreads_interactions"
+    df = spark.read.csv(f'hdfs:/user/bm106/pub/goodreads/{x}.csv', header=True, inferSchema=True)
+    df.printSchema()
+    user_id,book_id,is_read,rating,is_reviewed
+    df = spark.read.csv(f'hdfs:/user/bm106/pub/goodreads/{x}.csv', header=True, schema='first_name STRING, last_name STRING, income FLOAT, zipcode INT')
+
 
     scp /Users/jonathan/Desktop/data/small/goodreads_interactions_poetry.json  nz862@dumbo.hpc.nyu.edu:/home/nz862/final
     scp /Users/jonathan/Desktop/data/als_train.py  nz862@dumbo.hpc.nyu.edu:/home/nz862/final
@@ -33,8 +40,8 @@ import datetime
 def main(spark, data_file, percent_data):
 
     # Read data from parquet
-    interactions = spark.read.csv(data_file)
-    interactions.write.parquet('interactions.parquet')
+    #interactions = spark.read.csv(data_file)
+    #interactions.write.parquet('interactions.parquet')
     interactions_pq = spark.read.parquet('interactions.parquet')
     interactions_pq = interactions_pq.select('user_id', 'book_id', 'rating')
     interactions_pq.createOrReplaceTempView('interactions_pq')

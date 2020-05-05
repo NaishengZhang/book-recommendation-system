@@ -5,7 +5,15 @@
 Usage:
 
     spark-submit als_train.py data/small/goodreads_interactions_poetry.json
-    spark-submit als_train.py hdfs:/user/bm106/pub/goodreads/goodreads_interactions.csv 0.01
+    spark-submit als_train1.py hdfs:/user/bm106/pub/goodreads/goodreads_interactions.csv 0.01
+    interactions = spark.read.csv("hdfs:/user/bm106/pub/goodreads/goodreads_interactions.csv")
+
+    x = "goodreads_interactions"
+    df = spark.read.csv(f'hdfs:/user/bm106/pub/goodreads/{x}.csv', header=True, inferSchema=True)
+    df.printSchema()
+    user_id,book_id,is_read,rating,is_reviewed
+    df = spark.read.csv(f'hdfs:/user/bm106/pub/goodreads/{x}.csv', header=True, schema='first_name STRING, last_name STRING, income FLOAT, zipcode INT')
+
 
     scp /Users/jonathan/Desktop/data/small/goodreads_interactions_poetry.json  nz862@dumbo.hpc.nyu.edu:/home/nz862/final
     scp /Users/jonathan/Desktop/data/als_train.py  nz862@dumbo.hpc.nyu.edu:/home/nz862/final
@@ -33,15 +41,15 @@ import datetime
 def main(spark, data_file, percent_data):
 
     # Read data from parquet
-    interactions = spark.read.json(data_file)
-    # interactions.write.parquet('interactions.parquet')
+    interactions = spark.read.csv(data_file, header=True, inferSchema=True)
+    interactions.write.parquet('interactions.parquet')
     interactions_pq = spark.read.parquet('interactions.parquet')
     interactions_pq = interactions_pq.select('user_id', 'book_id', 'rating')
     interactions_pq.createOrReplaceTempView('interactions_pq')
     time_stamp = datetime.datetime.now()
   
     f = open("out.txt", "a")
-    print("time_stamp:" + time_stamp.strftime('%Y.%m.%d-%H:%M:%S'),file=f) ##2017.02.19-14:03:20
+    print("time_stamp:" + time_stamp.strftime('%Y.%m.%d-%H:%M:%S'), file=f) ##2017.02.19-14:03:20
     print("finish reading data", file=f)
     f.close()
     #filter: count of interactions > 10
@@ -54,10 +62,10 @@ def main(spark, data_file, percent_data):
     # distinct user id
     user = samples.select('user_id').distinct()
     # downsample 20% of data
-    user, drop = user.randomSplit([percent_data, 1-percent_data])
+    user, drop = user.randomSplit([percent_data, 1-percent_data],2)
 
     #split data, tarin, validation,test
-    a,b,c = user.randomSplit([0.6, 0.2, 0.2])
+    a,b,c = user.randomSplit([0.6, 0.2, 0.2],2)
     a.createOrReplaceTempView('a')
     b.createOrReplaceTempView('b')
     c.createOrReplaceTempView('c')
@@ -100,9 +108,9 @@ def main(spark, data_file, percent_data):
     train_total.createOrReplaceTempView('train_total')
     
     # convert string to numeric
-    train_new = convert(train_total)
-    val_val_new = convert(val_val)
-    test_test_new = convert(test_test)
+    # train_new = convert(train_total)
+    # val_val_new = convert(val_val)
+    # test_test_new = convert(test_test)
 
     f = open("out.txt", "a")
     print("finish convert", file=f)
@@ -114,32 +122,32 @@ def main(spark, data_file, percent_data):
     f = open("out.txt", "a")
     print("start fit model", file=f)
     f.close()
-    ALSmodel,rank,regParams,rmse = tune_ALS(train_new, val_val_new, 5, regParams, ranks)
+    ALSmodel,rank,regParams,rmse = tune_ALS(train_total, val_val, 5, regParams, ranks)
     print('final rank = {}, regParams = {}, rmse = {}'.format(rank,regParams,rmse))
 
     # predict test dataset
-    predictions = ASLmodel.transform(test_test_new)
+    predictions = ASLmodel.transform(test_test)
 
     # user_id_index,book_id_index,rating,recommendations
     # test_test_new: book rating
-    windowSpec = Window.partitionBy('user_id_index').orderBy(col('rating_index').desc())
-    perUserActualItemsDF = (test_test_new
-               .select('user_id_index', 'book_id_index', 'rating_index', F.rank().over(windowSpec).alias('rank'))
-               .where(f'rank <= {10} and rating_index > {0}')
-               .groupBy('user_id_index')
-               .agg(expr('collect_list(book_id_index) as recommendations')))
+    windowSpec = Window.partitionBy('user_id').orderBy(col('rating').desc())
+    perUserActualItemsDF = (test_test
+               .select('user_id', 'book_id', 'rating', F.rank().over(windowSpec).alias('rank'))
+               .where(f'rank <= {10} and rating > {0}') # rank = 500
+               .groupBy('user_id')
+               .agg(expr('collect_list(book_id) as recommendations')))
 
     # prediction: recommend book rating
-    windowSpec = Window.partitionBy('user_id_index').orderBy(col('prediction').desc())
+    windowSpec = Window.partitionBy('user_id').orderBy(col('prediction').desc())
     perUserPredictedItemsDF = (predictions
-               .select('user_id_index', 'book_id_index', 'prediction', F.rank().over(windowSpec).alias('rank'))
-               .where(f'rank <= {10} and rating_index > {0}')
-               .groupBy('user_id_index')
-               .agg(expr('collect_list(book_id_index) as recommendations')))
+               .select('user_id', 'book_id', 'prediction', F.rank().over(windowSpec).alias('rank'))
+               .where(f'rank <= {10} and rating > {0}')
+               .groupBy('user_id')
+               .agg(expr('collect_list(book_id) as recommendations')))
 
 
     # select recommendations,recommendations
-    perUserItemsRDD = perUserPredictedItemsDF.join(perUserActualItemsDF, 'user_id_index') \
+    perUserItemsRDD = perUserPredictedItemsDF.join(perUserActualItemsDF, 'user_id') \
         .rdd \
         .map(lambda row: (row[1], row[2]))
 
@@ -185,13 +193,13 @@ def tune_ALS(train_data, validation_data, maxIter, regParams, ranks):
         for reg in regParams:
             # get ALS model
             als = ALS().setMaxIter(maxIter).setRank(rank).setRegParam(reg)
-            als.setUserCol("user_id_index").setItemCol("book_id_index").setRatingCol("rating_index")
+            als.setUserCol("user_id").setItemCol("book_id").setRatingCol("rating")
             # train ALS model
             model = als.fit(train_data)
             # evaluate the model by computing the RMSE on the validation data
             predictions = model.transform(validation_data)
             evaluator = RegressionEvaluator(metricName="rmse",
-                                            labelCol="rating_index",
+                                            labelCol="rating",
                                             predictionCol="prediction")
             rmse = evaluator.evaluate(predictions)
             f = open("out.txt", "a")
@@ -217,7 +225,7 @@ if __name__ == "__main__":
     # spark = SparkSession.builder.appName('als_train').getOrCreate()
     memory = "15g" #for local but for cluster did a fixed number
     spark = (SparkSession.builder
-             .appName('als_train')
+             .appName('als_train1')
              .master('yarn')
              .config('spark.executor.memory', memory)
              .config('spark.driver.memory', memory)
@@ -227,7 +235,7 @@ if __name__ == "__main__":
     # Get the filename from the command line
     data_file = sys.argv[1]
     # data percent
-    percent_data = sys.argv[2]
+    percent_data = float(sys.argv[2])
     # And the location to store the trained model
     # model_file = sys.argv[2]
 
