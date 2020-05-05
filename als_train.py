@@ -205,6 +205,7 @@ def tune_ALS(train_data, validation_data, maxIter, regParams, ranks):
                                             predictionCol="prediction")
             rmse = evaluator.evaluate(predictions)
             f = open("out.txt", "a")
+            print(predictions.show(50), file=f)
             print('{} latent factors and regularization = {}: '
                   'validation RMSE is {}'.format(rank, reg, rmse), file=f)
             f.close()
