@@ -12,6 +12,7 @@ Usage:
 '''
 
 import sys
+import math
 
 # And pyspark.sql to get the spark session
 from pyspark.sql import SparkSession
@@ -214,7 +215,7 @@ if __name__ == "__main__":
 
     # Create the spark session object
     # spark = SparkSession.builder.appName('als_train').getOrCreate()
-    memory = f"{math.floor(psutil.virtual_memory()[1]*.9) >> 30}g" #for local but for cluster did a fixed number
+    memory = "15g" #for local but for cluster did a fixed number
     spark = (SparkSession.builder
              .appName('als_train')
              .master('yarn')
