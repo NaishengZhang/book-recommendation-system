@@ -92,10 +92,10 @@ def main(spark, data_file):
     train_total = train.union(val_train).union(test_train)
     train_total.createOrReplaceTempView('train_total')
     
-    # convert string to numeric
-    train_new = convert(train_total)
-    val_val_new = convert(val_val)
-    test_test_new = convert(test_test)
+    # # convert string to numeric
+    # train_new = convert(train_total)
+    # val_val_new = convert(val_val)
+    # test_test_new = convert(test_test)
 
     f = open("out.txt", "a")
     print("finish convert", file=f)
@@ -115,24 +115,24 @@ def main(spark, data_file):
 
     # user_id_index,book_id_index,rating,recommendations
     # test_test_new: book rating
-    windowSpec = Window.partitionBy('user_id_index').orderBy(col('rating').desc())
+    windowSpec = Window.partitionBy('user_id').orderBy(col('rating').desc())
     perUserActualItemsDF = (test_test_new
-               .select('user_id_index', 'book_id_index', 'rating', F.rank().over(windowSpec).alias('rank'))
+               .select('user_id', 'book_id', 'rating', F.rank().over(windowSpec).alias('rank'))
                .where(f'rank <= {10} and rating > {0}')
-               .groupBy('user_id_index')
-               .agg(expr('collect_list(book_id_index) as recommendations')))
+               .groupBy('user_id')
+               .agg(expr('collect_list(book_id) as recommendations')))
 
     # prediction: recommend book rating
     windowSpec = Window.partitionBy('user_id').orderBy(col('prediction').desc())
     perUserPredictedItemsDF = (predictions
-               .select('user_id_index', 'book_id_index', 'prediction', F.rank().over(windowSpec).alias('rank'))
+               .select('user_id', 'book_id', 'prediction', F.rank().over(windowSpec).alias('rank'))
                .where(f'rank <= {10} and rating > {0}')
-               .groupBy('user_id_index')
-               .agg(expr('collect_list(book_id_index) as recommendations')))
+               .groupBy('user_id')
+               .agg(expr('collect_list(book_id) as recommendations')))
 
 
     # select recommendations,recommendations
-    perUserItemsRDD = perUserPredictedItemsDF.join(perUserActualItemsDF, 'user_id_index') \
+    perUserItemsRDD = perUserPredictedItemsDF.join(perUserActualItemsDF, 'user_id') \
         .rdd \
         .map(lambda row: (row[1], row[2]))
 
@@ -178,7 +178,7 @@ def tune_ALS(train_data, validation_data, maxIter, regParams, ranks):
         for reg in regParams:
             # get ALS model
             als = ALS().setMaxIter(maxIter).setRank(rank).setRegParam(reg)
-            als.setUserCol("user_id_index").setItemCol("book_id_index").setRatingCol("rating")
+            als.setUserCol("user_id").setItemCol("book_id").setRatingCol("rating")
             # train ALS model
             model = als.fit(train_data)
             # evaluate the model by computing the RMSE on the validation data
