@@ -213,10 +213,19 @@ def tune_ALS(train_data, validation_data, maxIter, regParams, ranks):
 if __name__ == "__main__":
 
     # Create the spark session object
-    spark = SparkSession.builder.appName('als_train').getOrCreate()
+    # spark = SparkSession.builder.appName('als_train').getOrCreate()
+    memory = f"{math.floor(psutil.virtual_memory()[1]*.9) >> 30}g" #for local but for cluster did a fixed number
+    spark = (SparkSession.builder
+             .appName('als_train')
+             .master('yarn')
+             .config('spark.executor.memory', memory)
+             .config('spark.driver.memory', memory)
+             .getOrCreate())
+    spark.sparkContext.setLogLevel("ERROR")
 
     # Get the filename from the command line
     data_file = sys.argv[1]
+    # data percent
     percent_data = sys.argv[2]
     # And the location to store the trained model
     # model_file = sys.argv[2]
