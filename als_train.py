@@ -195,7 +195,7 @@ def tune_ALS(train_data, validation_data, maxIter, regParams, ranks):
         for reg in regParams:
             # get ALS model
             als = ALS().setMaxIter(maxIter).setRank(rank).setRegParam(reg)
-            als.setUserCol("user_id").setItemCol("book_id").setRatingCol("rating")
+            als.setUserCol("user_id").setItemCol("book_id").setRatingCol("rating").setColdStartStrategy("drop")
             # train ALS model
             model = als.fit(train_data)
             # evaluate the model by computing the RMSE on the validation data
