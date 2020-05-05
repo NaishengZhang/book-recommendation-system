@@ -5,8 +5,8 @@
 Usage:
 
     spark-submit als_train.py data/small/goodreads_interactions_poetry.json
-    spark-submit als_train.py hdfs:/user/bm106/pub/goodreads/goodreads_interactions.csv
-    
+    spark-submit als_train.py hdfs:/user/bm106/pub/goodreads/goodreads_interactions.csv 0.01
+
     scp /Users/jonathan/Desktop/data/small/goodreads_interactions_poetry.json  nz862@dumbo.hpc.nyu.edu:/home/nz862/final
     scp /Users/jonathan/Desktop/data/als_train.py  nz862@dumbo.hpc.nyu.edu:/home/nz862/final
 '''
@@ -217,7 +217,7 @@ if __name__ == "__main__":
 
     # Get the filename from the command line
     data_file = sys.argv[1]
-
+    percent_data = sys.argv[2]
     # And the location to store the trained model
     # model_file = sys.argv[2]
 
