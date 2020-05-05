@@ -54,7 +54,7 @@ def main(spark, data_file, percent_data):
     # distinct user id
     user = samples.select('user_id').distinct()
     # downsample 20% of data
-    user, drop = user.randomSplit([percent_data, 1-percent_data])
+    user, drop = user.randomSplit([percent_data, 1-percent_data],2)
 
     #split data, tarin, validation,test
     a,b,c = user.randomSplit([0.6, 0.2, 0.2])
@@ -217,7 +217,7 @@ if __name__ == "__main__":
     # spark = SparkSession.builder.appName('als_train').getOrCreate()
     memory = "15g" #for local but for cluster did a fixed number
     spark = (SparkSession.builder
-             .appName('als_train')
+             .appName('als_train1')
              .master('yarn')
              .config('spark.executor.memory', memory)
              .config('spark.driver.memory', memory)
