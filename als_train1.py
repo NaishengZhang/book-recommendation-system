@@ -33,8 +33,8 @@ import datetime
 def main(spark, data_file, percent_data):
 
     # Read data from parquet
-    interactions = spark.read.json(data_file)
-    # interactions.write.parquet('interactions.parquet')
+    interactions = spark.read.csv(data_file)
+    interactions.write.parquet('interactions.parquet')
     interactions_pq = spark.read.parquet('interactions.parquet')
     interactions_pq = interactions_pq.select('user_id', 'book_id', 'rating')
     interactions_pq.createOrReplaceTempView('interactions_pq')
