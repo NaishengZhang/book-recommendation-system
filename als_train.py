@@ -5,7 +5,7 @@
 Usage:
 
     spark-submit als_train.py data/small/goodreads_interactions_poetry.json
-    spark-submit als_train1.py hdfs:/user/bm106/pub/goodreads/goodreads_interactions.csv 0.01
+    spark-submit als_train.py hdfs:/user/bm106/pub/goodreads/goodreads_interactions.csv 0.01
     interactions = spark.read.csv("hdfs:/user/bm106/pub/goodreads/goodreads_interactions.csv")
 
     x = "goodreads_interactions"
@@ -41,8 +41,8 @@ import datetime
 def main(spark, data_file, percent_data):
 
     # Read data from parquet
-    interactions = spark.read.csv(data_file, header=True, inferSchema=True)
-    interactions.write.parquet('interactions.parquet')
+    # interactions = spark.read.csv(data_file, header=True, inferSchema=True)
+    # interactions.write.parquet('interactions.parquet')
     interactions_pq = spark.read.parquet('interactions.parquet')
     interactions_pq = interactions_pq.select('user_id', 'book_id', 'rating')
     interactions_pq.createOrReplaceTempView('interactions_pq')
