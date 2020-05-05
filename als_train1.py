@@ -5,7 +5,7 @@
 Usage:
 
     spark-submit als_train.py data/small/goodreads_interactions_poetry.json
-    spark-submit als_train.py hdfs:/user/bm106/pub/goodreads/goodreads_interactions.csv 0.01
+    spark-submit als_train1.py hdfs:/user/bm106/pub/goodreads/goodreads_interactions.csv 0.01
 
     scp /Users/jonathan/Desktop/data/small/goodreads_interactions_poetry.json  nz862@dumbo.hpc.nyu.edu:/home/nz862/final
     scp /Users/jonathan/Desktop/data/als_train.py  nz862@dumbo.hpc.nyu.edu:/home/nz862/final
@@ -57,7 +57,7 @@ def main(spark, data_file, percent_data):
     user, drop = user.randomSplit([percent_data, 1-percent_data],2)
 
     #split data, tarin, validation,test
-    a,b,c = user.randomSplit([0.6, 0.2, 0.2])
+    a,b,c = user.randomSplit([0.6, 0.2, 0.2],2)
     a.createOrReplaceTempView('a')
     b.createOrReplaceTempView('b')
     c.createOrReplaceTempView('c')
