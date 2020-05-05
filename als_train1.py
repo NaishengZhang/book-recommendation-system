@@ -41,7 +41,7 @@ def main(spark, data_file, percent_data):
     time_stamp = datetime.datetime.now()
   
     f = open("out.txt", "a")
-    print("time_stamp:" + time_stamp.strftime('%Y.%m.%d-%H:%M:%S'),file=f) ##2017.02.19-14:03:20
+    print("time_stamp:" + time_stamp.strftime('%Y.%m.%d-%H:%M:%S'), file=f) ##2017.02.19-14:03:20
     print("finish reading data", file=f)
     f.close()
     #filter: count of interactions > 10
