@@ -12,6 +12,7 @@ Usage:
 '''
 
 import sys
+import math
 
 # And pyspark.sql to get the spark session
 from pyspark.sql import SparkSession
