@@ -49,6 +49,7 @@ def main(spark, data_file, percent_data):
     f.close()
     interactions_pq = spark.read.parquet('interactions.parquet')
     interactions_pq = interactions_pq.select('user_id', 'book_id', 'rating')
+    interactions_pq = interactions_pq.filter(interactions_pq.rating > 0)
     interactions_pq.createOrReplaceTempView('interactions_pq')
 
     f = open("out.txt", "a")
