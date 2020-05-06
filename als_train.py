@@ -128,7 +128,7 @@ def main(spark, data_file, percent_data):
     print('final rank = {}, regParams = {}, rmse = {}'.format(rank,regParams,rmse))
 
     # predict test dataset
-    predictions = ASLmodel.transform(test_test)
+    predictions = ALSmodel.transform(test_test)
 
     # user_id_index,book_id_index,rating,recommendations
     # test_test_new: book rating
@@ -205,7 +205,7 @@ def tune_ALS(train_data, validation_data, maxIter, regParams, ranks):
                                             predictionCol="prediction")
             rmse = evaluator.evaluate(predictions)
             f = open("out.txt", "a")
-            print(predictions.show(50), file=f)
+            # print(predictions.show(50), file=f)
             print('{} latent factors and regularization = {}: '
                   'validation RMSE is {}'.format(rank, reg, rmse), file=f)
             f.close()
