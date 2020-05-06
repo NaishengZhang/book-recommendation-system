@@ -1,0 +1,55 @@
+program start at:2020.05.05-19:39:07
+finish reading data
+finish spliting
+finish convert
+start fit model
+None
+5 latent factors and regularization = 0.01: validation RMSE is nan
+None
+5 latent factors and regularization = 0.05: validation RMSE is nan
+program start at:2020.05.05-20:18:14
+finish reading data
+finish spliting
+finish convert
+start fit model
+None
+5 latent factors and regularization = 0.01: validation RMSE is 2.231860936647575
+None
+5 latent factors and regularization = 0.05: validation RMSE is 2.0117952340611858
+None
+5 latent factors and regularization = 0.1: validation RMSE is 1.9324692360821143
+None
+5 latent factors and regularization = 1: validation RMSE is 2.020890140128832
+None
+5 latent factors and regularization = 10: validation RMSE is 2.791100906026885
+None
+10 latent factors and regularization = 0.01: validation RMSE is 2.2134893840596495
+program start at:2020.05.06-01:04:45
+finish reading data
+program start at:2020.05.06-01:08:36
+finish reading data
+finish spliting
+finish convert
+start fit model
+5 latent factors and regularization = 0.01: validation RMSE is 1.7220790918940398
+5 latent factors and regularization = 0.05: validation RMSE is 1.6382477700596512
+5 latent factors and regularization = 0.1: validation RMSE is 1.6230517584404167
+5 latent factors and regularization = 1: validation RMSE is 1.9258330335617504
+5 latent factors and regularization = 10: validation RMSE is 2.7346155106933674
+10 latent factors and regularization = 0.01: validation RMSE is 1.7497988173832695
+10 latent factors and regularization = 0.05: validation RMSE is 1.6277510354561509
+10 latent factors and regularization = 0.1: validation RMSE is 1.6018825166236645
+10 latent factors and regularization = 1: validation RMSE is 1.9333785785589874
+10 latent factors and regularization = 10: validation RMSE is 2.734615510693367
+15 latent factors and regularization = 0.01: validation RMSE is 1.7764829014258028
+15 latent factors and regularization = 0.05: validation RMSE is 1.622663850045448
+15 latent factors and regularization = 0.1: validation RMSE is 1.5882558890656062
+15 latent factors and regularization = 1: validation RMSE is 1.9284642755007917
+15 latent factors and regularization = 10: validation RMSE is 2.7346155106933674
+20 latent factors and regularization = 0.01: validation RMSE is 1.7977402719106055
+20 latent factors and regularization = 0.05: validation RMSE is 1.6206979316101027
+20 latent factors and regularization = 0.1: validation RMSE is 1.5808036333300293
+20 latent factors and regularization = 1: validation RMSE is 1.9256824494473426
+20 latent factors and regularization = 10: validation RMSE is 2.7346155106933674
+
+MAP = 0.3545794360194642, precisionAtk = 0.5568450798990753, ndcgAt = 0.6633066411018425
