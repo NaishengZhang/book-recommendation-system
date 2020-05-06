@@ -136,7 +136,7 @@ def main(spark, data_file, percent_data):
     windowSpec = Window.partitionBy('user_id').orderBy(col('rating').desc())
     perUserActualItemsDF = (test_test
                .select('user_id', 'book_id', 'rating', F.rank().over(windowSpec).alias('rank'))
-               .where(f'rank <= {10} and rating > {0}') # rank = 500
+               .where(f'rank <= {500} and rating > {0}') # rank = 500
                .groupBy('user_id')
                .agg(expr('collect_list(book_id) as recommendations')))
 
@@ -144,7 +144,7 @@ def main(spark, data_file, percent_data):
     windowSpec = Window.partitionBy('user_id').orderBy(col('prediction').desc())
     perUserPredictedItemsDF = (predictions
                .select('user_id', 'book_id', 'prediction', F.rank().over(windowSpec).alias('rank'))
-               .where(f'rank <= {10} and rating > {0}')
+               .where(f'rank <= {500} and rating > {0}')
                .groupBy('user_id')
                .agg(expr('collect_list(book_id) as recommendations')))
 
