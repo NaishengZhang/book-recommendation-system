@@ -53,3 +53,30 @@ start fit model
 20 latent factors and regularization = 10: validation RMSE is 2.7346155106933674
 
 MAP = 0.3545794360194642, precisionAtk = 0.5568450798990753, ndcgAt = 0.6633066411018425
+program start at:2020.05.06-23:10:59
+finish reading data
+finish spliting
+finish convert
+start fit model
+5 latent factors and regularization = 0.01: validation RMSE is 0.9352591197002226
+5 latent factors and regularization = 0.05: validation RMSE is 0.8477369542593103
+5 latent factors and regularization = 0.1: validation RMSE is 0.837368702982319
+5 latent factors and regularization = 1: validation RMSE is 1.3107649313384608
+5 latent factors and regularization = 10: validation RMSE is 4.061038782612239
+10 latent factors and regularization = 0.01: validation RMSE is 0.9599770735484185
+10 latent factors and regularization = 0.05: validation RMSE is 0.8454464683391759
+10 latent factors and regularization = 0.1: validation RMSE is 0.8319096037488738
+10 latent factors and regularization = 1: validation RMSE is 1.3266150195275463
+10 latent factors and regularization = 10: validation RMSE is 4.0610387826122425
+15 latent factors and regularization = 0.01: validation RMSE is 0.9797867370305057
+15 latent factors and regularization = 0.05: validation RMSE is 0.8457033270584391
+15 latent factors and regularization = 0.1: validation RMSE is 0.8290603737046276
+15 latent factors and regularization = 1: validation RMSE is 1.3189698417754345
+15 latent factors and regularization = 10: validation RMSE is 4.061038782612259
+20 latent factors and regularization = 0.01: validation RMSE is 0.9830745053897262
+20 latent factors and regularization = 0.05: validation RMSE is 0.8460873128953545
+20 latent factors and regularization = 0.1: validation RMSE is 0.8279140918600388
+20 latent factors and regularization = 1: validation RMSE is 1.3169223753664525
+20 latent factors and regularization = 10: validation RMSE is 4.061038782612281
+
+MAP = 0.9909550421693318, precisionAtk = 0.9760545165856005, ndcgAt = 0.9988023547030813
