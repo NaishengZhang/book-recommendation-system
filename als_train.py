@@ -120,8 +120,8 @@ def main(spark, data_file, percent_data):
     f.close()
 
     # tuning parameter and train model
-    ranks = [5,10,15,20]
-    regParams = [0.01, 0.05, 0.1, 1, 10]
+    ranks = [5,10,15,20,25,30]
+    regParams = [0.01, 0.05, 0.1, 1]
     f = open("out.txt", "a")
     print("start fit model", file=f)
     f.close()
@@ -155,9 +155,12 @@ def main(spark, data_file, percent_data):
         .map(lambda row: (row[1], row[2]))
 
     rankingMetrics = RankingMetrics(perUserItemsRDD)
+
+    time_stamp = datetime.datetime.now()
     f = open("out.txt", "a")
     print('\nMAP = {}, precisionAtk = {}, ndcgAt = {}'\
-        .format(rankingMetrics.meanAveragePrecision, rankingMetrics.precisionAt(10),rankingMetrics.ndcgAt(10)), file=f)
+        .format(rankingMetrics.meanAveragePrecision, rankingMetrics.precisionAt(500),rankingMetrics.ndcgAt(500)), file=f)
+    print("program end at:" + time_stamp.strftime('%Y.%m.%d-%H:%M:%S'), file=f) ##2017.02.19-14:03:20
     f.close()
 
 
