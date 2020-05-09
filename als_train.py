@@ -220,7 +220,7 @@ def tune_ALS(train_data, validation_data, maxIter, regParams, ranks):
                 best_model = model
     f = open("out.txt", "a")
     print('\nThe best model has {} latent factors and '
-          'regularization = {}'.format(best_rank, best_regularization))
+          'regularization = {}'.format(best_rank, best_regularization), file=f)
     f.close()   
     return best_model,best_rank,best_regularization,min_error
 
