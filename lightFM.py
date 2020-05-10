@@ -149,29 +149,25 @@ def main(spark, data_file, percent_data):
     
     #Evaluate the model by using precision@k and ROC method
     f = open("lightout.txt", "a")
-    print("Train precision: %.2f" % precision_at_k(best_model, train_matrix, k=500).mean(),file=f)
-    print("Validation precision: %.2f" % precision_at_k(best_model, validation_matrix, k=500).mean(),file=f)
-    print("Test precision: %.2f" % precision_at_k(best_model, test_matrix, k=500).mean(),file=f)
+    print("k= 500, Train precision: %.2f" % precision_at_k(best_model, train_matrix, k=500).mean(),file=f)
+    print("k= 500, Validation precision: %.2f" % precision_at_k(best_model, validation_matrix, k=500).mean(),file=f)
+    print("k= 500, Test precision: %.2f" % precision_at_k(best_model, test_matrix, k=500).mean(),file=f)
 
-    print("Train precision: %.2f" % precision_at_k(best_model, train_matrix, k=100).mean(),file=f)
-    print("Validation precision: %.2f" % precision_at_k(best_model, validation_matrix, k=100).mean(),file=f)
-    print("Test precision: %.2f" % precision_at_k(best_model, test_matrix, k=100).mean(),file=f)
+    print("k= 100, Train precision: %.2f" % precision_at_k(best_model, train_matrix, k=100).mean(),file=f)
+    print("k= 100, Validation precision: %.2f" % precision_at_k(best_model, validation_matrix, k=100).mean(),file=f)
+    print("k= 100, Test precision: %.2f" % precision_at_k(best_model, test_matrix, k=100).mean(),file=f)
 
-    print("Train precision: %.2f" % precision_at_k(best_model, train_matrix, k=10).mean(),file=f)
-    print("Validation precision: %.2f" % precision_at_k(best_model, validation_matrix, k=10).mean(),file=f)
-    print("Test precision: %.2f" % precision_at_k(best_model, test_matrix, k=10).mean(),file=f)
+    print("k= 10, Train precision: %.2f" % precision_at_k(best_model, train_matrix, k=10).mean(),file=f)
+    print("k= 10, Validation precision: %.2f" % precision_at_k(best_model, validation_matrix, k=10).mean(),file=f)
+    print("k= 10, Test precision: %.2f" % precision_at_k(best_model, test_matrix, k=10).mean(),file=f)
 
-    print("Train precision: %.2f" % precision_at_k(best_model, train_matrix, k=5).mean(),file=f)
-    print("Validation precision: %.2f" % precision_at_k(best_model, validation_matrix, k=5).mean(),file=f)
-    print("Test precision: %.2f" % precision_at_k(best_model, test_matrix, k=5).mean(),file=f)
+    print("k= 5, Train precision: %.2f" % precision_at_k(best_model, train_matrix, k=5).mean(),file=f)
+    print("k= 5, Validation precision: %.2f" % precision_at_k(best_model, validation_matrix, k=5).mean(),file=f)
+    print("k= 5, Test precision: %.2f" % precision_at_k(best_model, test_matrix, k=5).mean(),file=f)
     score = auc_score(best_model, test_matrix,num_threads=1).mean()
-    print('The score is {} when learning rate = {} and learning schedule is {}'.format(score, learning_rate, learning_shedule),file=f)
-    f.close()
+    print('The auc_score is {} when learning rate = {} and learning schedule is {}'.format(score, learning_rate, learning_shedule),file=f)
 
     time_stamp = datetime.datetime.now()
-    f = open("lightout.txt", "a")
-    print('roc_auc_score = {}, precisionAtk = {}'\
-        .format(), file=f)
     print("program end at:" + time_stamp.strftime('%Y.%m.%d-%H:%M:%S'), file=f) 
     f.close()
 
