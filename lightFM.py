@@ -31,10 +31,8 @@ from pyspark.ml import Pipeline
 import numpy as np
 import pyspark.sql.functions as F
 import seaborn as sns
-import datetime
 import pandas as pd
 import numpy as np
-from datetime import datetime, timedelta
 from sklearn import preprocessing
 from lightfm import LightFM
 from scipy.sparse import csr_matrix 
@@ -42,10 +40,10 @@ from scipy.sparse import coo_matrix
 from sklearn.metrics import roc_auc_score
 from lightfm.evaluation import precision_at_k
 from lightfm.evaluation import auc_score
-import time
 import pickle
 import re
-
+import datetime
+import time
 
 def main(spark, data_file, percent_data):
 
