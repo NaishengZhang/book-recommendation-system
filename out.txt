@@ -80,3 +80,44 @@ start fit model
 20 latent factors and regularization = 10: validation RMSE is 4.061038782612281
 
 MAP = 0.9909550421693318, precisionAtk = 0.9760545165856005, ndcgAt = 0.9988023547030813
+program start at:2020.05.09-18:13:43
+finish reading data
+finish spliting
+finish convert
+start fit model
+program start at:2020.05.09-18:18:05
+program start at:2020.05.09-18:19:03
+finish reading data
+finish spliting
+finish convert
+start fit model
+5 latent factors and regularization = 0.01: validation RMSE is 0.935259119700261
+5 latent factors and regularization = 0.05: validation RMSE is 0.8477369542593104
+5 latent factors and regularization = 0.1: validation RMSE is 0.837368702982319
+5 latent factors and regularization = 1: validation RMSE is 1.3107649313384608
+10 latent factors and regularization = 0.01: validation RMSE is 0.9599770735754469
+10 latent factors and regularization = 0.05: validation RMSE is 0.8454464683440233
+10 latent factors and regularization = 0.1: validation RMSE is 0.8319096037489586
+10 latent factors and regularization = 1: validation RMSE is 1.3266150195275463
+15 latent factors and regularization = 0.01: validation RMSE is 0.9797867370661799
+15 latent factors and regularization = 0.05: validation RMSE is 0.8457033270547318
+15 latent factors and regularization = 0.1: validation RMSE is 0.8290603736680147
+15 latent factors and regularization = 1: validation RMSE is 1.3189698417754345
+20 latent factors and regularization = 0.01: validation RMSE is 0.9830745054402487
+20 latent factors and regularization = 0.05: validation RMSE is 0.8460873129375394
+20 latent factors and regularization = 0.1: validation RMSE is 0.8279140918581106
+20 latent factors and regularization = 1: validation RMSE is 1.3169223753664525
+25 latent factors and regularization = 0.01: validation RMSE is 0.9856206252078823
+25 latent factors and regularization = 0.05: validation RMSE is 0.8417045145827158
+25 latent factors and regularization = 0.1: validation RMSE is 0.8254476149223375
+25 latent factors and regularization = 1: validation RMSE is 1.3123602148457294
+program start at:2020.05.09-22:49:16
+30 latent factors and regularization = 0.01: validation RMSE is 0.9991038834747864
+30 latent factors and regularization = 0.05: validation RMSE is 0.8435023727255735
+30 latent factors and regularization = 0.1: validation RMSE is 0.8270957759371854
+30 latent factors and regularization = 1: validation RMSE is 1.3161871063765087
+
+The best model has 25 latent factors and regularization = 0.1
+
+MAP = 0.99096983076277, precisionAtk = 0.13895172681356727, ndcgAt = 0.9952965504835449
+program end at:2020.05.09-23:44:13
