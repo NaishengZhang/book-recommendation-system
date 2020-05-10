@@ -45,7 +45,7 @@ def main(spark, data_file, percent_data):
     # interactions.write.parquet('interactions.parquet')
     time_stamp = datetime.datetime.now()
     f = open("out.txt", "a")
-    print("program start at:" + time_stamp.strftime('%Y.%m.%d-%H:%M:%S'), file=f) ##2017.02.19-14:03:20
+    print("\nprogram start at:" + time_stamp.strftime('%Y.%m.%d-%H:%M:%S'), file=f) ##2017.02.19-14:03:20
     f.close()
     interactions_pq = spark.read.parquet('interactions.parquet')
     interactions_pq = interactions_pq.select('user_id', 'book_id', 'rating')
@@ -115,9 +115,9 @@ def main(spark, data_file, percent_data):
     # val_val_new = convert(val_val)
     # test_test_new = convert(test_test)
 
-    f = open("out.txt", "a")
-    print("finish convert", file=f)
-    f.close()
+    # f = open("out.txt", "a")
+    # print("finish convert", file=f)
+    # f.close()
 
     # tuning parameter and train model
     ranks = [5,10,15,20,25,30]
@@ -158,8 +158,8 @@ def main(spark, data_file, percent_data):
 
     time_stamp = datetime.datetime.now()
     f = open("out.txt", "a")
-    print('\nMAP = {}, precisionAtk = {}, ndcgAt = {}'\
-        .format(rankingMetrics.meanAveragePrecision, rankingMetrics.precisionAt(500),rankingMetrics.ndcgAt(500)), file=f)
+    print('MAP = {}, precisionAtk = {}, ndcgAt = {}'\
+        .format(rankingMetrics.meanAveragePrecision, rankingMetrics.precisionAt(100),rankingMetrics.ndcgAt(100)), file=f)
     print("program end at:" + time_stamp.strftime('%Y.%m.%d-%H:%M:%S'), file=f) ##2017.02.19-14:03:20
     f.close()
 
@@ -219,7 +219,7 @@ def tune_ALS(train_data, validation_data, maxIter, regParams, ranks):
                 best_regularization = reg
                 best_model = model
     f = open("out.txt", "a")
-    print('\nThe best model has {} latent factors and '
+    print('The best model has {} latent factors and '
           'regularization = {}'.format(best_rank, best_regularization), file=f)
     f.close()   
     return best_model,best_rank,best_regularization,min_error

@@ -1,31 +1,4 @@
-program start at:2020.05.05-19:39:07
-finish reading data
-finish spliting
-finish convert
-start fit model
-None
-5 latent factors and regularization = 0.01: validation RMSE is nan
-None
-5 latent factors and regularization = 0.05: validation RMSE is nan
-program start at:2020.05.05-20:18:14
-finish reading data
-finish spliting
-finish convert
-start fit model
-None
-5 latent factors and regularization = 0.01: validation RMSE is 2.231860936647575
-None
-5 latent factors and regularization = 0.05: validation RMSE is 2.0117952340611858
-None
-5 latent factors and regularization = 0.1: validation RMSE is 1.9324692360821143
-None
-5 latent factors and regularization = 1: validation RMSE is 2.020890140128832
-None
-5 latent factors and regularization = 10: validation RMSE is 2.791100906026885
-None
-10 latent factors and regularization = 0.01: validation RMSE is 2.2134893840596495
-program start at:2020.05.06-01:04:45
-finish reading data
+
 program start at:2020.05.06-01:08:36
 finish reading data
 finish spliting
@@ -51,8 +24,8 @@ start fit model
 20 latent factors and regularization = 0.1: validation RMSE is 1.5808036333300293
 20 latent factors and regularization = 1: validation RMSE is 1.9256824494473426
 20 latent factors and regularization = 10: validation RMSE is 2.7346155106933674
+MAP = 0.3545794360194642, precisionAtk = 0.5568450798990753, ndcgAt = 0.6633066411018425 (with rating = 0)
 
-MAP = 0.3545794360194642, precisionAtk = 0.5568450798990753, ndcgAt = 0.6633066411018425
 program start at:2020.05.06-23:10:59
 finish reading data
 finish spliting
@@ -78,8 +51,8 @@ start fit model
 20 latent factors and regularization = 0.1: validation RMSE is 0.8279140918600388
 20 latent factors and regularization = 1: validation RMSE is 1.3169223753664525
 20 latent factors and regularization = 10: validation RMSE is 4.061038782612281
+MAP = 0.9909550421693318, precisionAtk = 0.9760545165856005, ndcgAt = 0.9988023547030813 (precisionAt(10))
 
-MAP = 0.9909550421693318, precisionAtk = 0.9760545165856005, ndcgAt = 0.9988023547030813
 program start at:2020.05.09-18:13:43
 finish reading data
 finish spliting
@@ -111,13 +84,10 @@ start fit model
 25 latent factors and regularization = 0.05: validation RMSE is 0.8417045145827158
 25 latent factors and regularization = 0.1: validation RMSE is 0.8254476149223375
 25 latent factors and regularization = 1: validation RMSE is 1.3123602148457294
-program start at:2020.05.09-22:49:16
 30 latent factors and regularization = 0.01: validation RMSE is 0.9991038834747864
 30 latent factors and regularization = 0.05: validation RMSE is 0.8435023727255735
 30 latent factors and regularization = 0.1: validation RMSE is 0.8270957759371854
 30 latent factors and regularization = 1: validation RMSE is 1.3161871063765087
-
 The best model has 25 latent factors and regularization = 0.1
-
-MAP = 0.99096983076277, precisionAtk = 0.13895172681356727, ndcgAt = 0.9952965504835449
+MAP = 0.99096983076277, precisionAtk = 0.13895172681356727, ndcgAt = 0.9952965504835449 (precisionAt(500))
 program end at:2020.05.09-23:44:13
