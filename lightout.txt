@@ -1,0 +1,40 @@
+
+program start at:2020.05.10-16:23:00
+finish reading data
+finish spliting
+finish converting to pandas
+fine tuning program start at:2020.05.10-16:55:20
+program start fitting at:2020.05.10-16:55:20
+finising the fit which the parameters is learning rate = 0.01 and learning schedule is adagrad
+The score is 0.6589916944503784 when learning rate = 0.01 and learning schedule is adagrad
+program start fitting at:2020.05.10-16:56:10
+finising the fit which the parameters is learning rate = 0.01 and learning schedule is adadelta
+The score is 0.8577560186386108 when learning rate = 0.01 and learning schedule is adadelta
+program start fitting at:2020.05.10-16:56:56
+finising the fit which the parameters is learning rate = 0.05 and learning schedule is adagrad
+The score is 0.8333165049552917 when learning rate = 0.05 and learning schedule is adagrad
+program start fitting at:2020.05.10-16:57:40
+finising the fit which the parameters is learning rate = 0.05 and learning schedule is adadelta
+The score is 0.8586252331733704 when learning rate = 0.05 and learning schedule is adadelta
+program start fitting at:2020.05.10-16:58:27
+finising the fit which the parameters is learning rate = 0.1 and learning schedule is adagrad
+The score is 0.8769873976707458 when learning rate = 0.1 and learning schedule is adagrad
+program start fitting at:2020.05.10-16:59:09
+finising the fit which the parameters is learning rate = 0.1 and learning schedule is adadelta
+The score is 0.8566128015518188 when learning rate = 0.1 and learning schedule is adadelta
+
+We can get the best model when the learning rate =0.1 and the learning schedule is adadelta, the best score = 0.8769873976707458
+--- Run time:  4.581059205532074 mins ---
+Train precision: 0.06
+Validation precision: 0.03
+Test precision: 0.03
+Train precision: 0.13
+Validation precision: 0.07
+Test precision: 0.07
+Train precision: 0.30
+Validation precision: 0.15
+Test precision: 0.16
+Train precision: 0.35
+Validation precision: 0.17
+Test precision: 0.18
+The score is 0.8819377422332764 when learning rate = 0.1 and learning schedule is adadelta
