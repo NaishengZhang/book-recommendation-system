@@ -232,7 +232,7 @@ if __name__ == "__main__":
     # spark = SparkSession.builder.appName('als_train').getOrCreate()
     memory = "15g" #for local but for cluster did a fixed number
     spark = (SparkSession.builder
-             .appName('als_train1')
+             .appName('als_train')
              .master('yarn')
              .config('spark.executor.memory', memory)
              .config('spark.driver.memory', memory)
