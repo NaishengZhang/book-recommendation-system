@@ -122,7 +122,9 @@ def main(spark, data_file, percent_data):
     train = train_total.select("*").toPandas()
     test = test_test.select("*").toPandas()
     validation = val_val.select("*").toPandas()
-
+    f = open("lightout.txt", "a")
+    print("finish converting to pandas", file=f)
+    f.close()
     #convert spark dataframe to sparse matrix
     train_matrix,validation_matrix,test_matrix = convert_to_matrix(train, validation, test)
 
@@ -134,6 +136,7 @@ def main(spark, data_file, percent_data):
     best_model,learning_rate,learning_shedule,max_score = tune_LightFM(train_matrix, validation_matrix,learning_rates,learning_schedules, 2)
     
     #Evaluate the model by using precision@k and ROC method
+    f = open("lightout.txt", "a")
     print("Train precision: %.2f" % precision_at_k(best_model, train_matrix, k=500).mean(),file=f)
     print("Validation precision: %.2f" % precision_at_k(best_model, validation_matrix, k=500).mean(),file=f)
     print("Test precision: %.2f" % precision_at_k(best_model, test_matrix, k=500).mean(),file=f)
@@ -149,9 +152,9 @@ def main(spark, data_file, percent_data):
     print("Train precision: %.2f" % precision_at_k(best_model, train_matrix, k=5).mean(),file=f)
     print("Validation precision: %.2f" % precision_at_k(best_model, validation_matrix, k=5).mean(),file=f)
     print("Test precision: %.2f" % precision_at_k(best_model, test_matrix, k=5).mean(),file=f)
-
     score = auc_score(best_model, test_matrix,num_threads=1).mean()
     print('The score is {} when learning rate = {} and learning schedule is {}'.format(score, learning_rate, learning_shedule),file=f)
+    f.close()
 
     time_stamp = datetime.datetime.now()
     f = open("lightout.txt", "a")
@@ -168,12 +171,15 @@ def tune_LightFM(train_data, validation_data, learning_rates, learning_schedules
     """
     # initial
     time_stamp = datetime.datetime.now()
+    f = open("lightout.txt", "a")
     print("fine tuning program start at:" + time_stamp.strftime('%Y.%m.%d-%H:%M:%S'),file=f) 
+    f.close()
     start_time = time.time()
     max_score = 0
     best_lr = -1
     best_ls = ""
     best_model = None
+    f = open("lightout.txt", "a")
     for learning_rate in learning_rates:
         for learning_schedule in learning_schedules:
             # get LightFM model
@@ -194,6 +200,7 @@ def tune_LightFM(train_data, validation_data, learning_rates, learning_schedules
     print('\nWe can get the best model when the learning rate ={} and '
           'the learning schedule is {}, the best score = {}'.format(learning_rate, learning_schedule,max_score),file=f)
     print("--- Run time:  {} mins ---".format((time.time() - start_time)/60),file=f)
+    f.close()
     return best_model,learning_rate,learning_schedule,max_score
 
 #This function is to transfer the dataframe to sparse matrix
