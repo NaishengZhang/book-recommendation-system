@@ -121,5 +121,5 @@ start fit model
 30 latent factors and regularization = 0.1: validation RMSE is 0.827095775966343
 30 latent factors and regularization = 1: validation RMSE is 1.3161871063765087
 The best model has 25 latent factors and regularization = 0.1
-MAP = 0.9909698297073156, precisionAtk = 0.4699361290925158, ndcgAt = 0.9966377810382088
+MAP = 0.9909698297073156, precisionAtk = 0.4699361290925158, ndcgAt = 0.9966377810382088 (precisionAt(100))
 program end at:2020.05.10-09:07:28
