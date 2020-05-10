@@ -118,6 +118,11 @@ def main(spark, data_file, percent_data):
     val_val = val_val.select('user_id','book_id','rating')
     train_total = train.union(val_train).union(test_train)
     train_total.createOrReplaceTempView('train_total')
+
+
+    f = open("lightout.txt", "a")
+    print("Starting convert to pandas dataframe", file=f)
+    f.close()
     #convert spark dataframe to panda dataframe
     train = train_total.select("*").toPandas()
     test = test_test.select("*").toPandas()
@@ -125,9 +130,16 @@ def main(spark, data_file, percent_data):
     f = open("lightout.txt", "a")
     print("finish converting to pandas", file=f)
     f.close()
+
+
+    f = open("lightout.txt", "a")
+    print("Starting convert from dataframe to sparse matrix", file=f)
+    f.close()
     #convert spark dataframe to sparse matrix
     train_matrix,validation_matrix,test_matrix = convert_to_matrix(train, validation, test)
-
+    f = open("lightout.txt", "a")
+    print("Finishing convert from dataframe to sparse matrix", file=f)
+    f.close()
     #set the learning rate and learning schedule
     learning_rates = [0.01,0.05,0.1]
     learning_schedules = ['adagrad','adadelta']
