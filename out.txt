@@ -139,3 +139,19 @@ start fit model
 15 latent factors and regularization = 0.01: validation RMSE is 1.101007120789184
 15 latent factors and regularization = 0.05: validation RMSE is 0.9091132116541296
 15 latent factors and regularization = 0.1: validation RMSE is 0.8722283172931214
+15 latent factors and regularization = 1: validation RMSE is 1.3395719658782037
+20 latent factors and regularization = 0.01: validation RMSE is 1.112194672289673
+20 latent factors and regularization = 0.05: validation RMSE is 0.9086745512868403
+20 latent factors and regularization = 0.1: validation RMSE is 0.8671216358716497
+20 latent factors and regularization = 1: validation RMSE is 1.3235407354611808
+25 latent factors and regularization = 0.01: validation RMSE is 1.1349952508370609
+25 latent factors and regularization = 0.05: validation RMSE is 0.9100295348248371
+25 latent factors and regularization = 0.1: validation RMSE is 0.8658756193330117
+25 latent factors and regularization = 1: validation RMSE is 1.325618324690693
+30 latent factors and regularization = 0.01: validation RMSE is 1.1542645302402337
+30 latent factors and regularization = 0.05: validation RMSE is 0.9094696925872255
+30 latent factors and regularization = 0.1: validation RMSE is 0.8650189564678387
+30 latent factors and regularization = 1: validation RMSE is 1.3270373706323544
+The best model has 30 latent factors and regularization = 0.1
+MAP = 0.9753592112664814, precisionAtk = 0.46544065500043263, ndcgAt = 0.9881036579926652
+program end at:2020.05.10-21:00:29

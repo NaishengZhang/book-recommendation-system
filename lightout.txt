@@ -38,3 +38,57 @@ Train precision: 0.35
 Validation precision: 0.17
 Test precision: 0.18
 The score is 0.8819377422332764 when learning rate = 0.1 and learning schedule is adadelta
+
+program start at:2020.05.10-18:10:10
+finish reading data
+finish spliting
+Starting convert to pandas dataframe
+
+program start at:2020.05.10-19:44:14
+finish reading data
+finish spliting
+Starting convert to pandas dataframe
+
+program start at:2020.05.10-20:43:15
+finish reading data
+finish spliting
+Starting convert to pandas dataframe
+finish converting to pandas
+Starting convert from dataframe to sparse matrix
+Finishing convert from dataframe to sparse matrix
+fine tuning program start at:2020.05.10-20:54:42
+program start fitting at:2020.05.10-20:54:42
+finising the fit which the parameters is learning rate = 0.01 and learning schedule is adagrad
+The score is 0.742218554019928 when learning rate = 0.01 and learning schedule is adagrad
+program start fitting at:2020.05.10-21:04:45
+finising the fit which the parameters is learning rate = 0.01 and learning schedule is adadelta
+The score is 0.8921992182731628 when learning rate = 0.01 and learning schedule is adadelta
+program start fitting at:2020.05.10-21:13:44
+finising the fit which the parameters is learning rate = 0.05 and learning schedule is adagrad
+The score is 0.8827319145202637 when learning rate = 0.05 and learning schedule is adagrad
+program start fitting at:2020.05.10-21:22:15
+finising the fit which the parameters is learning rate = 0.05 and learning schedule is adadelta
+The score is 0.893157958984375 when learning rate = 0.05 and learning schedule is adadelta
+program start fitting at:2020.05.10-21:30:27
+finising the fit which the parameters is learning rate = 0.1 and learning schedule is adagrad
+The score is 0.9108692407608032 when learning rate = 0.1 and learning schedule is adagrad
+program start fitting at:2020.05.10-21:40:17
+finising the fit which the parameters is learning rate = 0.1 and learning schedule is adadelta
+The score is 0.8910148739814758 when learning rate = 0.1 and learning schedule is adadelta
+
+We can get the best model when the learning rate =0.1 and the learning schedule is adadelta, the best score = 0.9108692407608032
+--- Run time:  56.506363066037494 mins ---
+k= 500, Train precision: 0.05
+k= 500, Validation precision: 0.03
+k= 500, Test precision: 0.03
+k= 100, Train precision: 0.13
+k= 100, Validation precision: 0.07
+k= 100, Test precision: 0.07
+k= 10, Train precision: 0.31
+k= 10, Validation precision: 0.16
+k= 10, Test precision: 0.16
+k= 5, Train precision: 0.36
+k= 5, Validation precision: 0.17
+k= 5, Test precision: 0.17
+The auc_score is 0.90936678647995 when learning rate = 0.1 and learning schedule is adadelta
+program end at:2020.05.11-05:17:49
