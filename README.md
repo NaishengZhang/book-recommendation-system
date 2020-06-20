@@ -1,4 +1,4 @@
-# DSGA1004 - BIG DATA
+# [Book Recommendation System](https://github.com/NaishengZhang/book-recommendation-system)
 
 # Overview
 
