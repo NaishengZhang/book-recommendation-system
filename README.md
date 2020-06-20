@@ -1,23 +1,8 @@
 # DSGA1004 - BIG DATA
-## Final project
-- Prof Brian McFee (bm106)
-- Junge Zhang (jz3502)
-- Jack Zhu (wz727)
-
-*Handout date*: 2020-04-09
-
-*Submission deadline*: 2020-05-11
-
 
 # Overview
 
 In the final project, you will apply the tools you have learned in this class to build and evaluate a recommender system.  While the content of the final project involves recommender systems, it is intended more as an opportunity to integrate multiple techniques to solve a realistic, large-scale applied problem.
-
-For this project, you are encouraged to work in groups of no more than 3 students.
-
-Groups of 1--2 will need to implement one extension (described below) over the baseline project for full credit.
-
-Groups of 3 will need to implement two extensions for full credit.
 
 ## The data set
 
@@ -43,7 +28,7 @@ user_id,book_id,is_read,rating,is_reviewed
 The other two files consist of mappings between the user and book numerical identifiers used in the interactions file, and their alphanumeric strings which are used in supplementary data (see below).
 Overall there are 876K users, 2.4M books, and 223M interactions.
 
-## Basic recommender system [80% of grade]
+## Basic recommender system
 
 Your recommendation model should use Spark's alternating least squares (ALS) method to learn latent factor representations for users and items.
 Be sure to thoroughly read through the documentation on the [pyspark.ml.recommendation module](https://spark.apache.org/docs/latest/api/python/pyspark.ml.html#module-pyspark.ml.recommendation) before getting started.
@@ -109,7 +94,7 @@ If for any reason you are unable to run on the full dataset, you should report y
 Any sub-sampling should be performed prior to generating train/validation/test splits.
 
 
-## Extensions [20% of grade]
+## Extensions
 
 For full credit, implement an extension on top of the baseline collaborative filter model.  (Again, if you're working in a group of 3 students, you must implement two extensions for full credit.)
 
@@ -122,23 +107,3 @@ The choice of extension is up to you, but here are some ideas:
   - *Exploration*: use the learned representation to develop a visualization of the items and users, e.g., using T-SNE or UMAP.  The visualization should somehow integrate additional information (features, metadata, or genre tags) to illustrate how items are distributed in the learned space.
 
 You are welcome to propose your own extension ideas, but they must be submitted in writing and approved by the course staff (Brian, Jack, or Junge) by 2020-05-01 at the latest.  If you want to propose an extension, please get in contact as soon as possible so that we have sufficient time to consider and approve the idea.
-
-
-# What to turn in
-
-In addition to all of your code, produce a final report (not to exceed 4 pages), describing your implementation, evaluation results, and extensions.  Your report should clearly identify the contributions of each member of your group.  If any additional software components were required in your project, your choices should be described and well motivated here.  
-
-Include a PDF copy of your report in the github repository along with your code submission.
-
-Any additional software components should be documented with installation instructions.
-
-
-# Checklist
-
-It will be helpful to commit your work in progress to the repository.  Toward this end, we recommend the following loose timeline:
-
-- [ ] 2020/04/16: working local implementation on a subset of the data
-- [ ] 2020/04/23: baseline model implementation 
-- [ ] 2019/04/30: select extension(s)
-- [ ] 2020/05/07: begin write-up
-- [ ] 2019/05/11: final project submission (NO EXTENSIONS PAST THIS DATE)
