@@ -92,18 +92,3 @@ We suggest building sub-samples of 1%, 5%, and 25% of the data, and then running
 This will help you make efficient progress and debug your implementation, while still allowing other students to use the cluster effectively.
 If for any reason you are unable to run on the full dataset, you should report your partial results obtained on the smaller sub-samples.
 Any sub-sampling should be performed prior to generating train/validation/test splits.
-
-
-## Extensions
-
-For full credit, implement an extension on top of the baseline collaborative filter model.  (Again, if you're working in a group of 3 students, you must implement two extensions for full credit.)
-
-The choice of extension is up to you, but here are some ideas:
-
-   - *Extended interaction models*: The raw interaction data includes ratings (1-5 stars), but additional information is available, including [reviews](https://sites.google.com/eng.ucsd.edu/ucsdbookgraph/reviews?authuser=0).  Can you use this additional information to improve recommendation accuracy?  What about the `is_read` flag for each user/book interaction: how can you use this information?
-   - *Comparison to single-machine implementations*: compare Spark's parallel ALS model to a single-machine implementation, e.g. [lightfm](https://github.com/lyst/lightfm).  Your comparison should measure both effeciency (model fitting time as a function of data set size) and resulting accuracy.
-  - *Fast search*: use a spatial data structure (e.g., LSH or partition trees) to implement accelerated search at query time.  For this, it is best to use an existing library such as [annoy](https://github.com/spotify/annoy) or [nmslib](https://github.com/nmslib/nmslib), and you will need to export the model parameters from Spark to work in your chosen environment.  For full credit, you should provide a thorough evaluation of the efficiency gains provided by your spatial data structure over a brute-force search method.
-  - *Cold-start*: using the [supplementary book data](https://sites.google.com/eng.ucsd.edu/ucsdbookgraph/books?authuser=0), build a model that can map observable data to the learned latent factor representation for items.  To evaluate its accuracy, simulate a cold-start scenario by holding out a subset of items during training (of the recommender model), and compare its performance to a full collaborative filter model.
-  - *Exploration*: use the learned representation to develop a visualization of the items and users, e.g., using T-SNE or UMAP.  The visualization should somehow integrate additional information (features, metadata, or genre tags) to illustrate how items are distributed in the learned space.
-
-You are welcome to propose your own extension ideas, but they must be submitted in writing and approved by the course staff (Brian, Jack, or Junge) by 2020-05-01 at the latest.  If you want to propose an extension, please get in contact as soon as possible so that we have sufficient time to consider and approve the idea.
