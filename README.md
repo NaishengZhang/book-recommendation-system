@@ -1,9 +1,5 @@
 # [Book Recommendation System](https://github.com/NaishengZhang/book-recommendation-system)
 
-# Overview
-
-In the final project, you will apply the tools you have learned in this class to build and evaluate a recommender system.  While the content of the final project involves recommender systems, it is intended more as an opportunity to integrate multiple techniques to solve a realistic, large-scale applied problem.
-
 ## The data set
 
 In this project, we'll use the [Goodreads dataset](https://sites.google.com/eng.ucsd.edu/ucsdbookgraph/home) collected by 
@@ -82,13 +78,3 @@ We recommend doing these steps early on.
 You may consider downsampling the data to more rapidly prototype your model.
 If you do this, be careful that your downsampled data includes enough users from the validation set to test your model.
 
-
-### Using the cluster
-
-Please be considerate of your fellow classmates!  The Dumbo cluster is a limited, shared resource.  Make sure that your code is properly implemented and works efficiently.  If too many people run inefficient code simultaneously, it can slow down the entire cluster for everyone.
-
-Concretely, this means that it will be helpful for you to have a working pipeline that operates on progressively larger sub-samples of the training data.
-We suggest building sub-samples of 1%, 5%, and 25% of the data, and then running the entire set of experiments end-to-end on each sample before attempting the entire dataset.
-This will help you make efficient progress and debug your implementation, while still allowing other students to use the cluster effectively.
-If for any reason you are unable to run on the full dataset, you should report your partial results obtained on the smaller sub-samples.
-Any sub-sampling should be performed prior to generating train/validation/test splits.
